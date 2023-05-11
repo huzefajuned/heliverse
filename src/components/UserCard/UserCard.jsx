@@ -1,56 +1,73 @@
 import React from "react";
 import styles from "./UserCard.module.css";
+import { toast } from "react-toastify";
+import Loading from "../Loading/Loading";
+import { useSelector } from "react-redux";
 
-const UserCard = ({ data, setData, limit, setLimit }) => {
+const UserCard = ({ data, setData, limit, setLimit, loading, setLoading }) => {
+  const jsonData = useSelector((state) => state.json);
+  console.log("jsonData", jsonData);
   return (
     <>
-      {data.map((user) => {
-        const {
-          id,
-          available,
-          avatar,
-          domain,
-          email,
-          first_name,
-          gender,
-          last_name,
-        } = user;
-        return console.log(email);
-      })}
-      <div className={styles.card}>
-        <div className={styles.topCard}>
-          <img
-            // key={index}
-            // src={product_Thumbnail[0]?.path}
-            alt="product"
-            // onClick={() => navToViewPage(currentElem)}
-          />
-        </div>
-        <div className={styles.middleCard}>
-          {/* <span id={styles.name}> {product_Name.substring(0, 12)} </span> */}
-          {/* <span id={styles.price}> ₹{product_Price} </span> */}
-        </div>
+      {jsonData == true ? (
+        <Loading />
+      ) : (
+        <div className={styles.main}>
+          {data.map((user) => {
+            const {
+              id,
+              available,
+              avatar,
+              domain,
+              email,
+              first_name,
+              gender,
+              last_name,
+            } = user;
+            return (
+              <>
+                <div className={styles.card}>
+                  <div className={styles.topCard}>
+                    <img
+                      key={id}
+                      src={avatar}
+                      alt="product"
+                      // onClick={() => navToViewPage(currentElem)}
+                    />
+                  </div>
+                  <div className={styles.middleCard}>
+                    <span id={styles.name}>
+                      {" "}
+                      {first_name + " " + last_name}{" "}
+                    </span>
+                    {/* <span id={styles.price}> ₹{product_Price} </span> */}
+                  </div>
 
-        <div className={styles.bottomCard}>
-          <p id={styles.description}>
-            {/* {product_shortDescription?.substring(0, 30) + " ..."} */}
-          </p>
-          {/* <button
-            id={styles.addCart}
-            onClick={
-              product_Quantity == 0
-                ? () => {
-                    toast.error("Out Of Stock");
-                  }
-                : () => {
-                    handleClick(currentElem);
-                  }
-            }
-          > */}
-          {/* {product_Quantity == 0 ? "Out Of Stock" : "Add to cart"} */}
-          {/* </button> */}
+                  <div className={styles.bottomCard}>
+                    <p id={styles.description}>
+                      {/* {product_shortDescription?.substring(0, 30) + " ..."} */}
+                    </p>
+                    <button
+                      id={styles.addCart}
+                      onClick={
+                        available == false
+                          ? () => {
+                              toast.error("Not Available");
+                            }
+                          : () => {
+                              // handleClick(currentElem);
+                            }
+                      }
+                    >
+                      {available == false ? "Not Available" : "Make A team"}
+                    </button>
+                  </div>
+                </div>
+              </>
+            );
+          })}
         </div>
-      </div>
+      )}
     </>
   );
 };

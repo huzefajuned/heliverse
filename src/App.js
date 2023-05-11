@@ -4,7 +4,11 @@ import AllUsers from "./components/AllUsers/AllUsers";
 import Header from "./components/Header/Header";
 import Pagination from "./components/Pagination/Pagination";
 import usersData from "./data.json";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 function App() {
+  const [loading, setLoading] = useState(true);
   const [limit, setLimit] = useState(20);
   const [data, setData] = useState([]);
   useEffect(() => {
@@ -18,8 +22,11 @@ function App() {
         setLimit={setLimit}
         data={data}
         setData={setData}
+        loading={loading}
+        setLoading={setLoading}
       />
       <Pagination />
+      <ToastContainer />
     </>
   );
 }
