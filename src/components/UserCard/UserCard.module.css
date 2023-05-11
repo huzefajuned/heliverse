@@ -1,0 +1,108 @@
+.card {
+    width: 260px;
+    height: auto;
+    margin: 5px auto;
+    padding: 5px;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+  }
+  
+  .card:hover {
+    cursor: pointer;
+    box-shadow: rgba(64, 0, 0, 0.6) 0px 3px 2px, rgba(2, 138, 59, 0.3) 0px 3px 6px;
+  }
+  
+  .topCard {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 60%;
+    object-fit: contain;
+    align-items: center;
+    position: relative;
+  }
+  
+  .topCard > #heart {
+    color: rgb(255, 255, 255);
+    font-size: 25px;
+    font-weight: 800;
+    margin: 0px;
+    position: absolute;
+    top: 10px;
+    right: 0px;
+  }
+  
+  .topCard > #heart:hover {
+    color: rgb(41, 175, 27);
+  }
+  
+  .topCard > img {
+    border-radius: 20px;
+    width:  260px;
+    height:180px;
+    object-fit: contain;
+  }
+  
+  .middleCard {
+    height: 15%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  .middleCard > #name {
+    text-align: center;
+    font-family: monospace;
+    margin: 0px;
+    font-size: 18px;
+  }
+  
+  .middleCard > #price {
+    color: #8879b0;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    border-radius: 50%;
+    /* color: #ffffff; */
+    font-size: 22px;
+    object-fit: contain;
+    font-family: monospace;
+    margin: 0px;
+  }
+  
+  .bottomCard {
+    display: flex;
+    flex-direction: column;
+    /* flex-wrap: wrap; */
+    /* height: 25%; */
+    /* background-color: #04a501; */
+  }
+  
+  .bottomCard > #description {
+    color: #8879b0;
+    font-size: 17px;
+    margin: auto;
+  }
+  
+  .bottomCard > #addCart {
+    text-align: center;
+    margin: 10px auto;
+    justify-content: center;
+    font-family: "Ramaraja", serif;
+    letter-spacing: 2px;
+    width: 80%;
+    font-size: 18px;
+    /* height: 30px; */
+    color: white;
+    background-color: #8879b0;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .bottomCard > #addCart:hover {
+    background-color: #fbc5c5;
+    color: #000000;
+    border-radius: 4px;
+  }
+  
