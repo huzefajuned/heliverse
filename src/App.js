@@ -8,19 +8,24 @@ import "react-toastify/dist/ReactToastify.css";
 import jsonData from "./data.json";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import MyTeam from "./components/MyTeam/MyTeam";
+import Filter from "./components/Filter/Filter";
 
 function App() {
   const [loading, setLoading] = useState(true);
   const [limit, setLimit] = useState(20);
 
-  const totalItems = jsonData.length;
-  const totalpages = totalItems / Math.ceil(limit);
-
+  const [totalItems, setTotalItems] = useState(jsonData.length);
+  const [totalpages, setTotalpages] = useState(Math.round(totalItems / limit));
   const [currentPage, setCurrentPage] = useState(1);
-  console.log(currentPage);
+
   const [data, setData] = useState([]);
+  console.log(data)
   useEffect(() => {
-    setData(jsonData.slice(currentPage * limit - 20, currentPage * limit));
+    setData({
+      data: jsonData.slice(currentPage * limit - 20, currentPage * limit),
+      totalItems,
+      totalpages,
+    });
     setLoading(false);
   }, [currentPage]);
 
@@ -44,19 +49,24 @@ function App() {
   return (
     <>
       <BrowserRouter>
+        <Header
+          limit={limit}
+          setLimit={setLimit}
+          data={data}
+          setData={setData}
+          loading={loading}
+          setLoading={setLoading}
+          totalItems={totalItems}
+          setTotalItems={setTotalItems}
+          totalpages={totalpages}
+          setTotalpages={setTotalpages}
+        />
         <Routes>
           <Route
             path="/"
             element={
               <>
-                <Header
-                  limit={limit}
-                  setLimit={setLimit}
-                  data={data}
-                  setData={setData}
-                  loading={loading}
-                  setLoading={setLoading}
-                />
+                <Filter />
                 <AllUsers
                   limit={limit}
                   setLimit={setLimit}
@@ -69,6 +79,7 @@ function App() {
                   cart={cart}
                   setCart={setCart}
                   totalpages={totalpages}
+                  setTotalpages={setTotalpages}
                   currentPage={currentPage}
                   setCurrentPage={setCurrentPage}
                 />
@@ -79,22 +90,24 @@ function App() {
             path="/ViewTeam"
             element={
               <>
-                <Header
-                  limit={limit}
-                  setLimit={setLimit}
-                  data={data}
-                  setData={setData}
-                  loading={loading}
-                  setLoading={setLoading}
-                />
                 <MyTeam cart={cart} setCart={setCart} />
               </>
             }
           />
         </Routes>
       </BrowserRouter>
-
-      <ToastContainer />
+      <ToastContainer
+        position="top-left"
+        autoClose={300}
+        hideProgressBar
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />{" "}
     </>
   );
 }

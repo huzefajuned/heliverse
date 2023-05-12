@@ -19,6 +19,7 @@ const AllUsers = ({
   cart,
   setCart,
   totalpages,
+  setTotalPages,
   currentPage,
   setCurrentPage,
 }) => {
@@ -51,10 +52,11 @@ const AllUsers = ({
               />
               <Pagination
                 totalpages={totalpages}
+                setTotalPages={setTotalPages}
                 currentPage={currentPage}
                 setCurrentPage={setCurrentPage}
                 loading={loading}
-                  setLoading={setLoading}
+                setLoading={setLoading}
               />
             </>
           )}

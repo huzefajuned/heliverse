@@ -13,12 +13,12 @@ const UserCard = ({
   setLoading,
   handleChange,
   handleClick,
-}) => {
-
+}) => {  
   return (
+    
     <>
       <div className={styles.main}>
-        {data?.map((user) => {
+        {data?.data.map((user) => {
           const {
             id,
             available,
@@ -29,9 +29,7 @@ const UserCard = ({
             gender,
             last_name,
           } = user;
-
-          // navigating current  item into new page.... using useLocation
-   
+          
           return (
             <>
               <div className={styles.card}>
@@ -43,7 +41,11 @@ const UserCard = ({
                 </div>
 
                 <div className={styles.bottomCard}>
-                  <p id={styles.description}> <span style={{ color:"blue"}}>Domain - </span>  {domain?.substring(0,11)}</p>
+                  <p id={styles.description}>
+                    {" "}
+                    <span style={{ color: "blue" }}>Domain - </span>{" "}
+                    {domain?.substring(0, 11)}
+                  </p>
                   <button
                     id={styles.addCart}
                     onClick={
@@ -56,7 +58,9 @@ const UserCard = ({
                           }
                     }
                   >
-                    {available == false ? "Player Not Aavilable" : "Add to Team"}
+                    {available == false
+                      ? "Player Not Aavilable"
+                      : "Add to Team"}
                   </button>
                 </div>
               </div>

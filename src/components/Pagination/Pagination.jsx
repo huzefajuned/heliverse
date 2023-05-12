@@ -8,6 +8,8 @@ const Pagination = ({
   loading,
   setLoading,
 }) => {
+
+  console.log(totalpages)
   const btnHandle = (i) => {
     setLoading(true);
     setCurrentPage(i + 1);
