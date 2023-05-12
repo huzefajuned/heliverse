@@ -5,7 +5,9 @@
   align-items: center;
   justify-content: space-between;
   text-align: center;
-  background-color: #654e92;
+  background-color: #ffffff;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+  rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
   position: sticky;
   top: 0px;
   z-index: 999;
@@ -15,6 +17,7 @@
   /* background-color: #146d83; */
   width: 30%;
   /* padding: 5px; */
+  cursor: pointer;
 }
 
 .logo > h2 {
@@ -24,16 +27,15 @@
   font-size: 30px;
   align-items: center;
   text-align: center;
+  
 }
 
 .search {
   width: 60%;
   padding: 0px;
-
   display: flex;
   flex-direction: row-reverse;
   float: left;
-  /* background-color: #95a894; */
 }
 
 .search > input {
@@ -47,7 +49,9 @@
   border-radius: 5px;
   font-size: 20px;
   font-family: monospace;
-  border-bottom: 2px solid #ebd8b2;
+  border-bottom: 2px solid #000000;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+  rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
 }
 
 .search > input:hover {

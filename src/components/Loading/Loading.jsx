@@ -5,11 +5,12 @@ import loadingGif from "../../images/loading.gif";
 const Loding = () => {
   return (
     <div className={styles.container}>
+      <h2>No Results Found</h2>
       <img
         src={loadingGif}
         alt="loadingImg"
       />
-      {/* <button onClick={() => window.location.reload()}>Re Load Page</button> */}
+      <button onClick={() => window.location.reload()}>Re Load Page</button>
     </div>
   );
 };

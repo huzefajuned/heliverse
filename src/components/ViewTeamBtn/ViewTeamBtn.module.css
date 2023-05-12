@@ -1,0 +1,20 @@
+.btn{
+    color: red; 
+    margin: 10px;
+    text-align: center;
+}
+.btn>button{
+    /* background-color: rgb(188, 189, 190); */
+    color: rgb(64, 135, 23);
+    border: none;
+    width: 150px;
+    height: 40px;
+    cursor: pointer;
+    font-size: 20px;
+    font-family: monospace;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+.btn>button:hover{color: rgb(0, 0, 0);
+    background-color: rgb(234, 234, 234);
+}

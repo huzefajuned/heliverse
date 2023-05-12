@@ -13,6 +13,11 @@
     width: 60%;
     object-fit: cover;
   }
+  .container>h2{
+    font-size: 30px;
+    font-family: monospace;
+    color: rgb(53, 34, 0);
+  }
   .container > button {
     color: rgb(0, 0, 0);
     background-color: aliceblue;

@@ -1,17 +1,40 @@
+#heading {
+  text-align: center;
+  color: yellowgreen;
+  font-size: 22px;
+  font-family: monospace;
+}
+#members {
+  font-size: 22px;
+  color: red;
+  /* background-color: #a75757 ; */
+  margin: auto;
+  display: block;
+  text-align: center;
+}
 .main {
-  /* background-color: rgb(210, 196, 196); */
+  /* background-color: rgb(109, 3, 3); */
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
+  overflow: scroll;
+  width: 80%;
+  margin: 5% auto;
 }
+.inner {
+  /* background-color: white; */
+}
+
 .card {
-  width: 220px;
+  width: 200px;
   height: auto;
-  margin: 2px auto;
+  margin: 10px;
   padding: 5px;
   border-radius: 5px;
+  color: #861c1c;
+  /* background-color: aqua; */
   box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
     rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+  overflow: scroll;
 }
 
 .card:hover {
