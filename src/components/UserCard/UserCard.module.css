@@ -53,7 +53,7 @@
 }
 
 .middleCard {
-  height: 15%;
+  height:5%;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -90,16 +90,13 @@
 .bottomCard > #description {
   color: #000000;
   font-size: 20px;
-  /* margin: auto; */
-  /* background-color: #9d8787; */
-  padding: 2px;
-  border-radius: 10px;
+  padding: 0px;
   font-family: fantasy;
 }
 
 .bottomCard > #addCart {
   text-align: center;
-  margin: 10% auto;
+  margin: auto;
   justify-content: center;
   font-family: "Ramaraja", serif;
   letter-spacing: 3px;

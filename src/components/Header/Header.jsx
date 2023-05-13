@@ -10,7 +10,6 @@ const Header = ({ setData, setLoading, data, totalItems, setTotalItems,totalpage
   const [query, setQuery] = useState("");
   const limit = 20;
   const [currentPage, setCurrentPage] = useState(1);
-console.log(totalpages)
 
   const onKeyPressHandler = (e) => {
     if (e.keyCode === 13) {
@@ -24,19 +23,18 @@ console.log(totalpages)
       (item) =>
         item.domain.toLowerCase()?.includes(search) ||
         item.email.toLowerCase()?.includes(search) ||
-        item.first_name.toLowerCase()?.includes(search) ||
-        item.last_name.toLowerCase()?.includes(search)
-    );
+        item.first_name.toLowerCase()?.includes(search) ||    
+        item.last_name.toLowerCase()?.includes(search)||
+        item.gender.toLowerCase()?.includes(search)
+        );
     setTotalItems(filteredData.length);
     const totalItems = filteredData.length;
-    const total_Page = Math.round(totalItems / limit);
+    // const total_Page = Math.round(totalItems / limit);
     setData({
       data: jsonData.slice(currentPage * limit - 20, currentPage * limit),
-  
+      totalItems,
+      totalpages,
     });
-    setTotalpages(total_Page)
-    // setTotalPage(total_Page)
-    setLoading(false);
   }, [search]);
 
   return (
@@ -47,7 +45,7 @@ console.log(totalpages)
       <div className={styles.search}>
         <input
           type="text"
-          placeholder="Search By Name,Gender,Domain ..."
+          placeholder="Search By Random Name,Gender,Domain ..."
           onChange={(e) => setQuery(e.target.value.toLowerCase())}
           onKeyDown={(e) => onKeyPressHandler(e)}
         />

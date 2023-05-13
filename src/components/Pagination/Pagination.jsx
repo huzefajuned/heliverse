@@ -2,25 +2,28 @@ import React from "react";
 import styles from "./Pagination.module.css";
 
 const Pagination = ({
-  totalpages,
-  currentPage,
+  total_Page,
+  setTotal_Page,
   setCurrentPage,
   loading,
+  currentPage,
   setLoading,
+  data,
+  setData,
 }) => {
-
-  console.log(totalpages)
   const btnHandle = (i) => {
-    setLoading(true);
     setCurrentPage(i + 1);
   };
+
+  const pageNumbers = [...Array(data.total_Page).keys()].slice();
+  // console.log(pageNumbers);
   return (
     <>
       <div className={styles.container}>
-        {Array.from(Array(totalpages), (e, i) => {
+        {pageNumbers?.map((elem) => {
           return (
-            <button id={styles.btn} key={i} onClick={() => btnHandle(i)}>
-              {i + 1}
+            <button id={styles.btn} key={elem} onClick={() => btnHandle(elem)}>
+              {elem + 1}
             </button>
           );
         })}

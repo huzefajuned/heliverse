@@ -18,18 +18,20 @@ const AllUsers = ({
   handleClick,
   cart,
   setCart,
-  totalpages,
-  setTotalPages,
+  total_Page,
+  setTotal_Page,
   currentPage,
   setCurrentPage,
 }) => {
   return (
     <div className={styles.main}>
       {loading == true ? (
-        <Loading />
+        <>
+          <Loading />
+        </>
       ) : (
         <>
-          {data.length === 0 ? (
+          {data.user?.length === 0 ? (
             <Loading />
           ) : (
             <>
@@ -49,10 +51,14 @@ const AllUsers = ({
                 setLoading={loading}
                 handleChange={handleChange}
                 handleClick={handleClick}
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
               />
               <Pagination
-                totalpages={totalpages}
-                setTotalPages={setTotalPages}
+                data={data}
+                setData={setData}
+                total_Page={total_Page}
+                setTotal_Page={setTotal_Page}
                 currentPage={currentPage}
                 setCurrentPage={setCurrentPage}
                 loading={loading}

@@ -5,30 +5,47 @@ import Header from "./components/Header/Header";
 import Pagination from "./components/Pagination/Pagination";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import jsonData from "./data.json";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import MyTeam from "./components/MyTeam/MyTeam";
 import Filter from "./components/Filter/Filter";
+import axios from "axios";
 
 function App() {
   const [loading, setLoading] = useState(true);
   const [limit, setLimit] = useState(20);
 
-  const [totalItems, setTotalItems] = useState(jsonData.length);
-  const [totalpages, setTotalpages] = useState(Math.round(totalItems / limit));
+  const [totalItems, setTotalItems] = useState("jsonData.length");
+  const [total_Page, setTotal_Page] = useState(Math.round(totalItems / limit));
   const [currentPage, setCurrentPage] = useState(1);
-
+  // console.log("currentPage", currentPage);
   const [data, setData] = useState([]);
-  console.log(data)
-  useEffect(() => {
-    setData({
-      data: jsonData.slice(currentPage * limit - 20, currentPage * limit),
-      totalItems,
-      totalpages,
-    });
-    setLoading(false);
-  }, [currentPage]);
+  console.log("data", data);
 
+  // LOADING All DATA ONCE WHEN COMPONENT LOAD FOR THE FISRT TIME
+  // AND SAVE IN A STATE FOR LATER USE!!
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await axios.get("./data.json");
+      await setData({
+        user: response.data,
+        totalItems: response.data?.length,
+        total_Page: response.data?.length / 20,
+      });
+      setLoading(false);
+    };
+    fetchData();
+  }, []);
+
+  // simple logic for current page pagination
+  // useEffect(() => {
+  //   if (currentPage == 1) return;
+  //   setData({
+
+  //   });
+  //   setLoading(false);
+  // }, [currentPage]);
+
+  // console.log("data in app ", data?.length);
   // for cart only
   const [cart, setCart] = useState([]);
   const handleClick = (item) => {
@@ -58,15 +75,26 @@ function App() {
           setLoading={setLoading}
           totalItems={totalItems}
           setTotalItems={setTotalItems}
-          totalpages={totalpages}
-          setTotalpages={setTotalpages}
+          total_Page={total_Page}
+          setTotal_Page={setTotal_Page}
         />
         <Routes>
           <Route
             path="/"
             element={
               <>
-                <Filter />
+                <Filter
+                  limit={limit}
+                  setLimit={setLimit}
+                  data={data}
+                  setData={setData}
+                  loading={loading}
+                  setLoading={setLoading}
+                  totalItems={totalItems}
+                  setTotalItems={setTotalItems}
+                  total_Page={total_Page}
+                  setTotal_Page={setTotal_Page}
+                />
                 <AllUsers
                   limit={limit}
                   setLimit={setLimit}
@@ -78,8 +106,8 @@ function App() {
                   handleClick={handleClick}
                   cart={cart}
                   setCart={setCart}
-                  totalpages={totalpages}
-                  setTotalpages={setTotalpages}
+                  total_Page={total_Page}
+                  setTotal_Page={setTotal_Page}
                   currentPage={currentPage}
                   setCurrentPage={setCurrentPage}
                 />
