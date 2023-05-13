@@ -19,14 +19,20 @@ const Pagination = ({
   // console.log(pageNumbers);
   return (
     <>
-      <div className={styles.container}>
-        {pageNumbers?.map((elem) => {
-          return (
-            <button id={styles.btn} key={elem} onClick={() => btnHandle(elem)}>
-              {elem + 1}
-            </button>
-          );
-        })}
+      <div className={styles.mainContainer}>
+        <div className={styles.container}>
+          {pageNumbers?.map((elem) => {
+            return (
+              <button
+                id={styles.btn}
+                key={elem}
+                onClick={() => btnHandle(elem)}
+              >
+                {elem + 1}
+              </button>
+            );
+          })}
+        </div>
       </div>
     </>
   );

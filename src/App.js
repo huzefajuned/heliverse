@@ -20,6 +20,7 @@ function App() {
   // console.log("currentPage", currentPage);
   const [data, setData] = useState([]);
   console.log("data", data);
+  console.log("currentPage", currentPage);
 
   // LOADING All DATA ONCE WHEN COMPONENT LOAD FOR THE FISRT TIME
   // AND SAVE IN A STATE FOR LATER USE!!
@@ -35,17 +36,6 @@ function App() {
     };
     fetchData();
   }, []);
-
-  // simple logic for current page pagination
-  // useEffect(() => {
-  //   if (currentPage == 1) return;
-  //   setData({
-
-  //   });
-  //   setLoading(false);
-  // }, [currentPage]);
-
-  // console.log("data in app ", data?.length);
   // for cart only
   const [cart, setCart] = useState([]);
   const handleClick = (item) => {
@@ -94,7 +84,11 @@ function App() {
                   setTotalItems={setTotalItems}
                   total_Page={total_Page}
                   setTotal_Page={setTotal_Page}
+                  currentPage={currentPage}
+                  setCurrentPage={setCurrentPage}
                 />
+
+                
                 <AllUsers
                   limit={limit}
                   setLimit={setLimit}

@@ -1,10 +1,18 @@
 import React, { useEffect, useState } from "react";
 import styles from "./Header.module.css";
-import jsonData from "../../data.json";
+import axios from "axios";
 
 import logo from "../../images/heliverse.png";
 import { useNavigate } from "react-router-dom";
-const Header = ({ setData, setLoading, data, totalItems, setTotalItems,totalpages, setTotalpages}) => {
+const Header = ({
+  setData,
+  setLoading,
+  data,
+  totalItems,
+  setTotalItems,
+  totalpages,
+  setTotalpages,
+}) => {
   const navigate = useNavigate();
   const [search, setSearch] = useState("");
   const [query, setQuery] = useState("");
@@ -14,27 +22,30 @@ const Header = ({ setData, setLoading, data, totalItems, setTotalItems,totalpage
   const onKeyPressHandler = (e) => {
     if (e.keyCode === 13) {
       setSearch(query);
-      setLoading(true);
     }
   };
 
   useEffect(() => {
-    const filteredData = jsonData.filter(
-      (item) =>
-        item.domain.toLowerCase()?.includes(search) ||
-        item.email.toLowerCase()?.includes(search) ||
-        item.first_name.toLowerCase()?.includes(search) ||    
-        item.last_name.toLowerCase()?.includes(search)||
-        item.gender.toLowerCase()?.includes(search)
-        );
-    setTotalItems(filteredData.length);
-    const totalItems = filteredData.length;
-    // const total_Page = Math.round(totalItems / limit);
-    setData({
-      data: jsonData.slice(currentPage * limit - 20, currentPage * limit),
-      totalItems,
-      totalpages,
-    });
+    const fetchData = async () => {
+      const response = await axios.get("./data.json");
+      const originalData = response.data;
+      const filteredData = await originalData.filter(
+        (item) =>
+          item.domain.toLowerCase()?.includes(search) ||
+          item.email.toLowerCase()?.includes(search) ||
+          item.first_name.toLowerCase()?.includes(search) ||
+          item.last_name.toLowerCase()?.includes(search) ||
+          item.gender.toLowerCase()?.includes(search)
+      );
+
+      await setData({
+        user: filteredData,
+        totalItems: filteredData.length,
+        total_Page: Math.ceil(filteredData.length / 20),
+      });
+      await setCurrentPage(1);
+    };
+    fetchData();
   }, [search]);
 
   return (

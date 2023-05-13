@@ -36,16 +36,14 @@ const Filter = ({
   setTotalItems,
   total_Page,
   setTotal_Page,
+  currentPage,
+  setCurrentPage,
 }) => {
   const [selectedGender, setSelectedGender] = useState("");
-  // console.log("selectedGender", selectedGender);
   const [isAvailable, setIsAvailable] = useState("");
-  // console.log(data?.user?.length);
   const [domain, setDomain] = useState("");
-  const [currentPage, setCurrentPage] = useState(1);
 
-  const [filterApiData, setFilterApiData] = useState([]);
-
+  //handles gender check
   const handleGenderFilter = (event) => {
     setSelectedGender(event.target.value);
     toast.info(event.target.value);
@@ -60,7 +58,7 @@ const Filter = ({
     }
     toast.info(event.target.value);
   };
-  //handles domain filtering
+  //handles domain check
   const handleDomain = (event) => {
     setDomain(event.target.value);
     toast.info(event.target.value);
@@ -74,8 +72,7 @@ const Filter = ({
     const fetchData = async () => {
       const response = await axios.get("./data.json");
       const originalData = response.data;
-      // console.log(domain);
-      const filteredData = originalData.filter(
+      const filteredData = await originalData.filter(
         (item) => item.gender.indexOf(selectedGender) !== -1
       );
 
@@ -84,6 +81,7 @@ const Filter = ({
         totalItems: filteredData.length,
         total_Page: Math.ceil(filteredData.length / 20),
       });
+      await setCurrentPage(1);
     };
     fetchData();
   }, [selectedGender]);
@@ -94,12 +92,10 @@ const Filter = ({
     if (isAvailable.length === 0) {
       return;
     }
-    console.log("isAvailable", isAvailable);
     const fetchData = async () => {
       const response = await axios.get("./data.json");
       const originalData = response.data;
-      console.log(originalData);
-      const filteredData = originalData.filter(
+      const filteredData = await originalData.filter(
         (item) => item.available == isAvailable
       );
 
@@ -108,11 +104,12 @@ const Filter = ({
         totalItems: filteredData.length,
         total_Page: Math.ceil(filteredData.length / 20),
       });
+      await setCurrentPage(1);
     };
     fetchData();
   }, [isAvailable]);
 
-    //Loading all data first and then after filtering for specif inputs and then after save it to state variable
+  //Loading all data first and then after filtering for specif inputs and then after save it to state variable
   // for only selectedGender
   useEffect(() => {
     if (domain.length === 0) {
@@ -121,8 +118,7 @@ const Filter = ({
     const fetchData = async () => {
       const response = await axios.get("./data.json");
       const originalData = response.data;
-      // console.log(domain);
-      const filteredData = originalData.filter(
+      const filteredData = await originalData.filter(
         (item) => item.domain.indexOf(domain) !== -1
       );
 
@@ -131,12 +127,10 @@ const Filter = ({
         totalItems: filteredData.length,
         total_Page: Math.ceil(filteredData.length / 20),
       });
+      await setCurrentPage(1);
     };
     fetchData();
   }, [domain]);
-
-
-  
 
   return (
     <div className={styles.main}>
@@ -146,7 +140,7 @@ const Filter = ({
             <option key={gender} value={gender}>
               {gender}
             </option>
-          ))}
+          ))}   
         </select>
       </div>
 

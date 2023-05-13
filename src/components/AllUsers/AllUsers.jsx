@@ -36,7 +36,7 @@ const AllUsers = ({
           ) : (
             <>
               {cart.length === 0 ? (
-                <p style={{ textAlign: "center", color: "wheat" }}>
+                <p className={styles.noTeams}>
                   U are not Created any team. <br /> Please Create A Team.
                 </p>
               ) : (
